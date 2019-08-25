@@ -5,6 +5,7 @@ require "suri_lang/version"
 Gem::Specification.new do |spec|
   spec.name          = "suri_lang"
   spec.version       = SuriLang::VERSION
+  spec.add_dependency("natto", "~> 1.1")
   spec.authors       = ["tanaken0515"]
   spec.email         = ["tanaka.kentaro.kk1222@gmail.com"]
 
