@@ -39,5 +39,9 @@ RSpec.describe SuriLang::Translator do
     it '"ください" が "くだサイ" に変換されること' do
       expect(SuriLang::Translator.translate('そこに座ってください')).to eq('そこに座ってくだサイ')
     end
+
+    it '助動詞以外の "まし" は変換されないこと' do
+      expect(SuriLang::Translator.translate('もう少しましなものはないのか？')).to eq('もう少しましなものはないのか？')
+    end
   end
 end
