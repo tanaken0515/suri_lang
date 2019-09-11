@@ -19,5 +19,9 @@ module SuriLang
     def self.katakana(morphemes)
       morphemes.map {|morpheme| DICTIONARY[morpheme.to_sym] || morpheme}
     end
+
+    def self.translate(text)
+      return katakana(wakati(text)).join
+    end
   end
 end
