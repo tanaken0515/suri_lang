@@ -3,6 +3,10 @@ RSpec.describe SuriLang::Translator do
     it '正しく分かち書きされること' do
       expect(SuriLang::Translator.wakati('私の名前は田中です')).to eq(%w(私 の 名前 は 田中 です))
     end
+
+    it '未知語が欠損しないこと' do
+      expect(SuriLang::Translator.wakati('SUZURIのスリスリくんさんです')).to eq(%w(SUZURI の スリ スリ くん さん です))
+    end
   end
 
   describe '.translate' do
@@ -24,6 +28,10 @@ RSpec.describe SuriLang::Translator do
 
     it '助動詞以外の "まし" は変換されないこと' do
       expect(SuriLang::Translator.translate('もう少しましなものはないのか？')).to eq('もう少しましなものはないのか？')
+    end
+
+    it '未知語が欠損しないこと' do
+      expect(SuriLang::Translator.translate('SUZURIのスリスリくんさんです')).to eq('SUZURIのスリスリくんさんデス')
     end
   end
 end

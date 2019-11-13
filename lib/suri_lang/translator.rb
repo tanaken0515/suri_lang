@@ -13,7 +13,7 @@ module SuriLang
 
     def self.wakati(text)
       nm = Natto::MeCab.new('-Owakati')
-      nm.enum_parse(text).select{|n| n.is_nor?}.map(&:surface)
+      nm.enum_parse(text).select{|n| !n.is_eos?}.map(&:surface)
     end
 
     def self.katakana(word, word_class)
@@ -22,7 +22,7 @@ module SuriLang
 
     def self.translate(text)
       nm = Natto::MeCab.new('-F%m,%f[0]')
-      features = nm.enum_parse(text).select{|n| n.is_nor?}.map{|n| n.feature.split(',')}
+      features = nm.enum_parse(text).select{|n| !n.is_eos?}.map{|n| n.feature.split(',')}
       words = features.map{|feature| katakana(feature[0], feature[1])}
       words.join
     end
