@@ -10,28 +10,21 @@ RSpec.describe SuriLang::Translator do
   end
 
   describe '.translate' do
-    it '"です" が "デス" に変換されること' do
-      expect(SuriLang::Translator.translate('私の名前は田中です')).to eq('私の名前は田中デス')
+    let(:sentence_sets) do
+      [
+        {input: '私の名前は田中です', expected: '私の名前は田中デス'}, # "です" -> "デス"
+        {input: 'いよいよ夏がやってきました', expected: 'いよいよ夏がやってきマシた'}, # "ました" -> "マシた"
+        {input: 'ぜひチェックしてくれ！', expected: 'ぜひチェックしてクレ！'}, # "してくれ" -> "してクレ"
+        {input: 'そこに座ってください', expected: 'そこに座ってくだサイ'}, # "ください" -> "くだサイ"
+        {input: 'もう少しましなものはないのか？', expected: 'もう少しましなものはないのか？'}, # 助動詞以外の "まし" は変換されない
+        {input: 'SUZURIのスリスリくんさんです', expected: 'SUZURIのスリスリくんさんデス'}, # 未知語が欠損しない
+      ]
     end
 
-    it '"ました" が "マシた" に変換されること' do
-      expect(SuriLang::Translator.translate('いよいよ夏がやってきました')).to eq('いよいよ夏がやってきマシた')
-    end
-
-    it '"してくれ" が "してクレ" に変換されること' do
-      expect(SuriLang::Translator.translate('ぜひチェックしてくれ！')).to eq('ぜひチェックしてクレ！')
-    end
-
-    it '"ください" が "くだサイ" に変換されること' do
-      expect(SuriLang::Translator.translate('そこに座ってください')).to eq('そこに座ってくだサイ')
-    end
-
-    it '助動詞以外の "まし" は変換されないこと' do
-      expect(SuriLang::Translator.translate('もう少しましなものはないのか？')).to eq('もう少しましなものはないのか？')
-    end
-
-    it '未知語が欠損しないこと' do
-      expect(SuriLang::Translator.translate('SUZURIのスリスリくんさんです')).to eq('SUZURIのスリスリくんさんデス')
+    it '正しく翻訳されること' do
+      sentence_sets.each do |sentence_set|
+        expect(SuriLang::Translator.translate(sentence_set[:input])).to eq(sentence_set[:expected])
+      end
     end
   end
 end
