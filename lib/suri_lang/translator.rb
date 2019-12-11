@@ -48,15 +48,17 @@ module SuriLang
       nm.enum_parse(text).select{|n| !n.is_eos?}.map(&:surface)
     end
 
-    def self.katakana(word, word_class)
-      DICTIONARY["#{word},#{word_class}".to_sym] || word
-    end
-
     def self.translate(text)
       nm = Natto::MeCab.new('-F%m,%f[0]')
       features = nm.enum_parse(text).select{|n| !n.is_eos?}.map{|n| n.feature.split(',')}
-      words = features.map{|feature| katakana(feature[0], feature[1])}
+      words = features.map{|feature| to_suri_word(feature[0], feature[1])}
       words.join
+    end
+
+    private
+
+    def self.to_suri_word(word, word_class)
+      DICTIONARY["#{word},#{word_class}".to_sym] || word
     end
   end
 end
