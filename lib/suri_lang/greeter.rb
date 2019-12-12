@@ -3,8 +3,7 @@ require 'yaml'
 module SuriLang
   class Greeter
     def self.greet
-      message = 'hello world!'
-      message
+      self.greeting_list.sample['text']
     end
 
     def self.greeting_list
