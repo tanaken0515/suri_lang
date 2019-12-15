@@ -4,5 +4,4 @@ require "suri_lang/greeter"
 
 module SuriLang
   class Error < StandardError; end
-  # Your code goes here...
 end
