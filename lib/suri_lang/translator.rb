@@ -50,15 +50,15 @@ module SuriLang
 
     def self.translate(text)
       nm = Natto::MeCab.new('-F%m,%f[0]')
-      features = nm.enum_parse(text).select{|n| !n.is_eos?}.map{|n| n.feature.split(',')}
-      words = features.map{|feature| to_suri_word(feature[0], feature[1])}
-      words.join
+      features = nm.enum_parse(text).select{|n| !n.is_eos?}.map{|n| n.feature}
+
+      features.map{|feature| to_suri_word(feature)}.join
     end
 
     private
 
-    def self.to_suri_word(word, word_class)
-      DICTIONARY["#{word},#{word_class}".to_sym] || word
+    def self.to_suri_word(feature)
+      DICTIONARY[feature.to_sym] || feature.split(',')[0]
     end
   end
 end
