@@ -1,8 +1,10 @@
 # SuriLang
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/suri_lang`. To experiment with that code, run `bin/console` for an interactive prompt.
+SuriLang is a rubygem that translates incoming messages as spoken by "[忍者スリスリくん](https://twitter.com/suzurijp)". 
 
-TODO: Delete this and the text above, and describe your gem
+## Requirements
+
+SuriLang depends on [natto](https://github.com/buruzaemon/natto). Please read [Requirements in natto/README\.md at master · buruzaemon/natto](https://github.com/buruzaemon/natto/blob/master/README.md#requirements).
 
 ## Installation
 
@@ -22,17 +24,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'suri_lang'
 
-## Development
+SuriLang::Translator.translate('SUZURIの忍者スリスリくんです')
+# => "SUZURIの忍者スリスリくんデス" 
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+greeter = SuriLang::Greeter.random_build
+greeter.message
+# => "石器ブンブン！ SUZURIの公式忍者、忍者スリスリくんデス。" 
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/suri_lang. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/tanaken0515/suri_lang. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
